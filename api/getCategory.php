@@ -24,6 +24,10 @@ if ($result->num_rows > 0) {
 					   </td>
 					</tr>";
 
+
+
+
+
 		$toReturn2 .= "<div id='edit_department".$row['cat_id']."' class='modal custom-modal fade' role='dialog'>
 						   <div class='modal-dialog'>
 							  <button type='button' class='close' data-dismiss='modal'>&times;</button>

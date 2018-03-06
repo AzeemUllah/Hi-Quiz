@@ -332,11 +332,10 @@
 					},
 					success: function (data) {
 						if (data) {
-							if(data == "0"){
+							if(data[0] == "0"){
 								alert("No category in table");
 							}
 							else{
-								
 								$("#datatable").DataTable().destroy();
 								$("#categoryInjector").html(data[0]);
 								$('.datatable').DataTable({
@@ -358,7 +357,7 @@
 		});
 		
 		
-		$("#submit").click(function(){
+		$("#addCategory").click(function(){
 			$.ajax({
 					url: "api/addCategory.php",
 					type: "POST",
@@ -377,20 +376,64 @@
 							}
 						}
 					},
-					error: function () {
-						alert("Server error.");
+					error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
 					}
-
 				});
 		});
 		
 		
 		function editCategory(id){
-			
+            $.ajax({
+                url: "api/editCategory.php",
+                type: "POST",
+                data: {
+                    categoryName: $("#editCategoryName"+id).val(),
+                    categoryDesc: $("#editCategoryDesc"+id).val(),
+                    id: id
+                },
+                success: function (data) {
+                    if (data) {
+                        if(data == "1"){
+                            window.location.replace("./category-list.php");
+                        }
+                        else{
+                            console.log(data);
+                            alert("Error!");
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Server error.");
+                }
+
+            });
 		}
 		
 		function deleteCategory(id){
-			
+            $.ajax({
+                url: "api/deleteCategory.php",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data) {
+                        if(data == "1"){
+                            window.location.replace("./category-list.php");
+                        }
+                        else{
+                            console.log(data);
+                            alert("Error!");
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Server error.");
+                }
+
+            });
 		}
 		
 		</script>

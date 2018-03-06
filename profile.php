@@ -12,6 +12,7 @@ include "./api/config.php";
 	$address = "";
 	$gender = "";
 	$dob = "";
+	$active = "";
 
 $sql = "";
 if(isset($_GET['id'])){
@@ -31,12 +32,32 @@ if(isset($_GET['id'])){
 			$address = $row["address"];
 			$gender = $row["gender"];
 			$dob = $row["dob"];
+			$active = $row["active"];
 		}
 	}else{
 		echo '<script>alert("No such user exists"); window.location = \'./profile.php\' </script>';
 	}
 
-	
+
+    $isFollowing = false;
+
+	if(isset($_GET['id']) && $_GET['id'] != $_SESSION['id']){
+        $sql = "SELECT * FROM `follow_friends` WHERE `user_id` = " . $_SESSION['id'];
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                if($row['follow_id'] == $_GET['id']){
+                    $isFollowing = true;
+                }
+            }
+        }else{
+            $isFollowing = false;
+        }
+    }
+
+
+
 	
 ?>
 <html>
@@ -65,8 +86,46 @@ if(isset($_GET['id'])){
 						<div class="col-sm-8">
 							<h4 class="page-title">My Profile</h4>
 						</div>
-						
+
 						<div class="col-sm-4 text-right m-b-30">
+
+
+                            <!-- only admin can have this -->
+                            <?php
+                            if(isset($_GET['id'])) {
+                                if ($_SESSION['admin'] == "1" && $_GET['id'] != $_SESSION['id'] && $admin == "0") { ?>
+                                    <div class="dropdown action-label">
+                                        <a class="btn btn-white btn-sm rounded dropdown-toggle" href="#"
+                                           data-toggle="dropdown" aria-expanded="false">
+                                            <?php
+                                            if ($active == "1") {
+                                                echo '<i class="fa fa-dot-circle-o text-success"></i> Active <i class="caret"></i>';
+                                            } else {
+                                                echo '<i class="fa fa-dot-circle-o text-danger"></i> Deactive <i class="caret"></i>';
+                                            }
+                                            ?>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a onclick="activateUser(<?php echo $_GET['id']; ?>);"><i
+                                                            class="fa fa-dot-circle-o text-success"></i> Active</a></li>
+                                            <li><a onclick="deactivateUser(<?php echo $_GET['id']; ?>);"><i
+                                                            class="fa fa-dot-circle-o text-danger"></i> Deactive </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+
+
+
+
+
+
+
+
+
 							<a href="edit-profile.html" class="btn btn-primary rounded"><i class="fa fa-plus"></i> Edit Profile</a>
 						</div>
 					</div>
@@ -86,8 +145,27 @@ if(isset($_GET['id'])){
 													<h3 class="user-name m-t-0 m-b-0"><?php echo $name; ?></h3>
 													<small class="text-muted"> &nbsp  </small>
 													<div class="staff-id">  &nbsp </div>
-													<div class="staff-msg"><a href="chat.html" class="btn btn-custom">Send Message</a></div>
-												</div>
+
+                                                    <?php
+
+                                                        if(isset($_GET['id'])){
+                                                            if($_GET['id'] != $_SESSION['id'] && $_SESSION['admin'] == "0"){
+                                                                $text = "Follow";
+                                                                $textCode = "0";
+                                                                if($isFollowing == true){
+                                                                    $text = "Unfollow";
+                                                                    $textCode = "1";
+                                                                }
+
+                                                                echo '<div class="staff-msg"><a onclick="followUnfollow('.$_GET['id'].', '.$textCode.')" class="btn btn-custom">'.$text.'</a></div>';
+                                                            }
+                                                        }
+
+                                                    ?>
+
+
+
+                                                </div>
 											</div>
 											<div class="col-md-7">
 												<ul class="personal-info">
@@ -430,6 +508,87 @@ if(isset($_GET['id'])){
 		<script type="text/javascript" src="js/moment.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
+    
+        <script>
+            function activateUser(id) {
+                $.ajax({
+                    url: "api/activateUser.php",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data) {
+                            if(data == "1"){
+                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                            }
+                            else{
+                                console.log(data);
+                                alert("Error!");
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+            }
+
+            function deactivateUser(id) {
+                $.ajax({
+                    url: "api/deactivateUser.php",
+                    type: "POST",
+                    data: {
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data) {
+                            if(data == "1"){
+                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                            }
+                            else{
+                                console.log(data);
+                                alert("Error!");
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+            }
+            
+            function followUnfollow(id,code) {
+                $.ajax({
+                    url: "api/followUnfollow.php",
+                    type: "POST",
+                    data: {
+                        code: code,
+                        id: id
+                    },
+                    success: function (data) {
+                        if (data) {
+                            if(data == "1"){
+                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                            }
+                            else{
+                                console.log(data);
+                                alert("Error!");
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });
+            }
+            
+        </script>
+    
+    
     </body>
 
 <!-- Mirrored from dreamguys.co.in/hrms/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Feb 2018 20:50:25 GMT -->

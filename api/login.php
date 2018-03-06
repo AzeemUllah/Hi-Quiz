@@ -15,6 +15,7 @@ if ($result->num_rows > 0) {
 		$_SESSION["address"] = $row["address"];
 		$_SESSION["gender"] = $row["gender"];
 		$_SESSION["dob"] = $row["dob"];
+
     }
 	echo 1;
 } else {
