@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2018 at 12:06 PM
+-- Generation Time: Mar 09, 2018 at 12:17 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -155,7 +155,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `user_email`, `is_admin`, `phone`, `address`, `gender`, `dob`, `active`, `user_pic`) VALUES
-(2, 'admin', 'admin123', 'admin@hiquiz.com', 1, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg');
+(2, 'admin', 'admin123', 'admin@hiquiz.com', 1, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg'),
+(4, 'admin', 'admin123', 'admin@hiquiz.com', 0, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg');
 
 --
 -- Indexes for dumped tables
@@ -253,7 +254,7 @@ ALTER TABLE `quiz`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

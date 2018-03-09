@@ -184,8 +184,8 @@ if(isset($_GET['id'])){
                                 <div class="form-group">
                                     <label>Select Category</label>
                                     <select class="select">
-                                        <option>John Doe</option>
-                                        <option>Richard Miles</option>
+                                        <option>Cat 1</option>
+                                        <option>Cat 2</option>
                                     </select>
                                 </div>
                             </div>
@@ -240,131 +240,131 @@ if(isset($_GET['id'])){
     </div>
 
 
-
-    <div id="edit_salary" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <div class="modal-content modal-lg">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add Staff Salary</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Select Staff</label>
-                                    <select class="select">
-                                        <option>John Doe</option>
-                                        <option>Richard Miles</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Net Salary</label>
-                                <input class="form-control" type="text" value="$4000">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="text-primary">Earnings</h4>
-                                <div class="form-group">
-                                    <label>Basic</label>
-                                    <input class="form-control" type="text" value="$6500">
-                                </div>
-                                <div class="form-group">
-                                    <label>DA(40%)</label>
-                                    <input class="form-control" type="text" value="$2000">
-                                </div>
-                                <div class="form-group">
-                                    <label>HRA(15%)</label>
-                                    <input class="form-control" type="text" value="$700">
-                                </div>
-                                <div class="form-group">
-                                    <label>Conveyance</label>
-                                    <input class="form-control" type="text" value="$70">
-                                </div>
-                                <div class="form-group">
-                                    <label>Allowance</label>
-                                    <input class="form-control" type="text" value="$30">
-                                </div>
-                                <div class="form-group">
-                                    <label>Medical  Allowance</label>
-                                    <input class="form-control" type="text" value="$20">
-                                </div>
-                                <div class="form-group">
-                                    <label>Others</label>
-                                    <input class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="text-primary">Deductions</h4>
-                                <div class="form-group">
-                                    <label>TDS</label>
-                                    <input class="form-control" type="text" value="$300">
-                                </div>
-                                <div class="form-group">
-                                    <label>ESI</label>
-                                    <input class="form-control" type="text" value="$20">
-                                </div>
-                                <div class="form-group">
-                                    <label>PF</label>
-                                    <input class="form-control" type="text" value="$20">
-                                </div>
-                                <div class="form-group">
-                                    <label>Leave</label>
-                                    <input class="form-control" type="text" value="$250">
-                                </div>
-                                <div class="form-group">
-                                    <label>Prof. Tax</label>
-                                    <input class="form-control" type="text" value="$110">
-                                </div>
-                                <div class="form-group">
-                                    <label>Labour Welfare</label>
-                                    <input class="form-control" type="text" value="$10">
-                                </div>
-                                <div class="form-group">
-                                    <label>Fund</label>
-                                    <input class="form-control" type="text" value="$40">
-                                </div>
-                                <div class="form-group">
-                                    <label>Others</label>
-                                    <input class="form-control" type="text" value="$15">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m-t-20 text-center">
-                            <button class="btn btn-primary">Save & Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
+<!---->
+<!--    <div id="edit_salary" class="modal custom-modal fade" role="dialog">-->
+<!--        <div class="modal-dialog">-->
+<!--            <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--            <div class="modal-content modal-lg">-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Add Staff Salary</h4>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <form>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Select Staff</label>-->
+<!--                                    <select class="select">-->
+<!--                                        <option>John Doe</option>-->
+<!--                                        <option>Richard Miles</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6">-->
+<!--                                <label>Net Salary</label>-->
+<!--                                <input class="form-control" type="text" value="$4000">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-6">-->
+<!--                                <h4 class="text-primary">Earnings</h4>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Basic</label>-->
+<!--                                    <input class="form-control" type="text" value="$6500">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>DA(40%)</label>-->
+<!--                                    <input class="form-control" type="text" value="$2000">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>HRA(15%)</label>-->
+<!--                                    <input class="form-control" type="text" value="$700">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Conveyance</label>-->
+<!--                                    <input class="form-control" type="text" value="$70">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Allowance</label>-->
+<!--                                    <input class="form-control" type="text" value="$30">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Medical  Allowance</label>-->
+<!--                                    <input class="form-control" type="text" value="$20">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Others</label>-->
+<!--                                    <input class="form-control" type="text">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6">-->
+<!--                                <h4 class="text-primary">Deductions</h4>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>TDS</label>-->
+<!--                                    <input class="form-control" type="text" value="$300">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>ESI</label>-->
+<!--                                    <input class="form-control" type="text" value="$20">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>PF</label>-->
+<!--                                    <input class="form-control" type="text" value="$20">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Leave</label>-->
+<!--                                    <input class="form-control" type="text" value="$250">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Prof. Tax</label>-->
+<!--                                    <input class="form-control" type="text" value="$110">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Labour Welfare</label>-->
+<!--                                    <input class="form-control" type="text" value="$10">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Fund</label>-->
+<!--                                    <input class="form-control" type="text" value="$40">-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label>Others</label>-->
+<!--                                    <input class="form-control" type="text" value="$15">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="m-t-20 text-center">-->
+<!--                            <button class="btn btn-primary">Save & Update</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!---->
+<!---->
 
 
-    <div id="delete_salary" class="modal custom-modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content modal-md">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Salary</h4>
-                </div>
-                <form>
-                    <div class="modal-body card-box">
-                        <p>Are you sure want to delete this?</p>
-                        <div class="m-t-20 text-left">
-                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
+
+<!--    <div id="delete_salary" class="modal custom-modal fade" role="dialog">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content modal-md">-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Delete Salary</h4>-->
+<!--                </div>-->
+<!--                <form>-->
+<!--                    <div class="modal-body card-box">-->
+<!--                        <p>Are you sure want to delete this?</p>-->
+<!--                        <div class="m-t-20 text-left">-->
+<!--                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>-->
+<!--                            <button type="submit" class="btn btn-danger">Delete</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 
 
@@ -397,5 +397,4 @@ if(isset($_GET['id'])){
 </script>
 </body>
 
-<!-- Mirrored from dreamguys.co.in/hrms/salary.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 10 Feb 2018 20:50:36 GMT -->
 </html>
