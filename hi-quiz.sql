@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2018 at 04:29 PM
+-- Generation Time: Mar 09, 2018 at 12:06 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -39,7 +39,7 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`, `cat_topic`) VALUES
-(4, 'sadasd', 'dasd');
+(1, 'sadasd', 'dasd');
 
 -- --------------------------------------------------------
 
@@ -87,9 +87,15 @@ CREATE TABLE `question_bank` (
   `c3` varchar(255) NOT NULL,
   `c4` varchar(255) NOT NULL,
   `correct` varchar(255) NOT NULL,
-  `ques_no` varchar(255) NOT NULL,
-  `cat_id` int(11) NOT NULL
+  `quiz_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `question_bank`
+--
+
+INSERT INTO `question_bank` (`ques_id`, `ques_name`, `c1`, `c2`, `c3`, `c4`, `correct`, `quiz_id`) VALUES
+(2, 'Howadasd asdsad??', 'sadasd', 'asdasd', 'dasd', 'dsad', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -99,21 +105,29 @@ CREATE TABLE `question_bank` (
 
 CREATE TABLE `quiz` (
   `quiz_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `player_score` int(11) NOT NULL,
-  `quiz_time` time NOT NULL
+  `quiz_time` time NOT NULL,
+  `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz`
+--
+
+INSERT INTO `quiz` (`quiz_id`, `quiz_time`, `cat_id`) VALUES
+(1, '06:25:18', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `quiz_question`
+-- Table structure for table `quiz_question_score`
 --
 
-CREATE TABLE `quiz_question` (
+CREATE TABLE `quiz_question_score` (
   `quiz_id` int(11) NOT NULL,
   `ques_id` int(11) NOT NULL,
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL,
+  `answer` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -141,9 +155,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `user_email`, `is_admin`, `phone`, `address`, `gender`, `dob`, `active`, `user_pic`) VALUES
-(1, 'sadas', 'adsd', 'sadasd', 0, NULL, NULL, NULL, '0000-00-00', b'1', 'images/user.jpg'),
-(2, 'abc', '1', 'abc', 0, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg'),
-(3, 'abc', '123456', 'dasd@dasd.com', 0, NULL, NULL, NULL, NULL, b'1', 'images/user.jpg');
+(2, 'admin', 'admin123', 'admin@hiquiz.com', 1, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg');
 
 --
 -- Indexes for dumped tables
@@ -176,24 +188,25 @@ ALTER TABLE `follow_friends`
 --
 ALTER TABLE `question_bank`
   ADD PRIMARY KEY (`ques_id`),
-  ADD KEY `ques_id` (`ques_id`,`cat_id`),
-  ADD KEY `cat_id` (`cat_id`);
+  ADD KEY `ques_id` (`ques_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
 
 --
 -- Indexes for table `quiz`
 --
 ALTER TABLE `quiz`
   ADD PRIMARY KEY (`quiz_id`),
-  ADD KEY `quiz_id` (`quiz_id`,`user_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `quiz_id` (`quiz_id`),
+  ADD KEY `cat_id` (`cat_id`);
 
 --
--- Indexes for table `quiz_question`
+-- Indexes for table `quiz_question_score`
 --
-ALTER TABLE `quiz_question`
-  ADD PRIMARY KEY (`quiz_id`,`ques_id`),
+ALTER TABLE `quiz_question_score`
+  ADD PRIMARY KEY (`quiz_id`,`ques_id`,`user_id`),
   ADD KEY `quiz_id` (`quiz_id`,`ques_id`),
-  ADD KEY `ques_id` (`ques_id`);
+  ADD KEY `ques_id` (`ques_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `user`
@@ -210,7 +223,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `challenger`
@@ -228,13 +241,13 @@ ALTER TABLE `follow_friends`
 -- AUTO_INCREMENT for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  MODIFY `ques_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ques_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -256,21 +269,21 @@ ALTER TABLE `follow_friends`
 -- Constraints for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  ADD CONSTRAINT `question_bank_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `category` (`cat_id`);
+  ADD CONSTRAINT `question_bank_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`);
 
 --
 -- Constraints for table `quiz`
 --
 ALTER TABLE `quiz`
-  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quiz_question` (`quiz_id`);
+  ADD CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `category` (`cat_id`);
 
 --
--- Constraints for table `quiz_question`
+-- Constraints for table `quiz_question_score`
 --
-ALTER TABLE `quiz_question`
-  ADD CONSTRAINT `quiz_question_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`),
-  ADD CONSTRAINT `quiz_question_ibfk_2` FOREIGN KEY (`ques_id`) REFERENCES `question_bank` (`ques_id`);
+ALTER TABLE `quiz_question_score`
+  ADD CONSTRAINT `quiz_question_score_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `quiz_question_score_ibfk_2` FOREIGN KEY (`ques_id`) REFERENCES `question_bank` (`ques_id`),
+  ADD CONSTRAINT `quiz_question_score_ibfk_3` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -27,10 +27,14 @@
 						<div class="col-sm-8">
 							<h4 class="page-title">Category</h4>
 						</div>
-						<div class="col-sm-4 text-right m-b-30">
-							<a href="#" class="btn btn-primary rounded" data-toggle="modal" data-target="#add_department"><i class="fa fa-plus"></i> Add New Category</a>
-						</div>
-					</div>
+
+                        <?php if($_SESSION['admin'] == 1){ ?>
+                            <div class="col-sm-4 text-right m-b-30">
+                                <a href="#" class="btn btn-primary rounded" data-toggle="modal" data-target="#add_department"><i class="fa fa-plus"></i> Add New Category</a>
+                            </div>
+                        <?php } ?>
+
+                    </div>
 					<div class="row">
 						<div class="col-md-12">
 							<div>
@@ -57,8 +61,8 @@
 					</div>
                 </div>
 				
-				
-				
+
+
 				<div class="notification-box">
 					<div class="msg-sidebar notifications msg-noti">
 						<div class="topnav-dropdown-header">
@@ -382,7 +386,13 @@
 					}
 				});
 		});
-		
+
+
+
+        $("#see_quiz").click(function(){
+
+        });
+
 		
 		function editCategory(id){
             $.ajax({

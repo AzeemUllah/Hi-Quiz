@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION['id'] = null;
 ?>
 <html>
 <head>
@@ -49,6 +50,8 @@ session_start();
         <script type="text/javascript" src="js/app.js"></script>
 		
 		<script>
+
+
 		$("#submit").click(function(){
 			$.ajax({
 					url: "api/login.php",
@@ -60,7 +63,7 @@ session_start();
 					success: function (data) {
 						if (data) {
 							if(data == "1"){
-								window.location.replace("./dashboard.php");
+								window.location.replace("./profile.php");
 							}
 							else{
 								console.log(data);

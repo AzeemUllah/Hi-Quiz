@@ -38,11 +38,11 @@ session_start();
                            <div class="col-sm-9 col-xs-9">
 								<div class="form-group form-focus">
 									<label class="control-label">User Name</label>
-									<input type="text" class="form-control floating" />
+									<input id="searchTxtb" type="text" class="form-control floating" />
 								</div>
                            </div>
                            <div class="col-sm-3 col-xs-6">  
-                                <a href="#" class="btn btn-success btn-block"> Search </a>  
+                                <a onclick="searchUser()" class="btn btn-success btn-block"> Search </a>
                            </div>     
                     </div>
 					<div id="usersInjector" class="row staff-grid-row">
@@ -898,6 +898,79 @@ session_start();
                 error: function (xhr, status, error) {
                     var err = eval("(" + xhr.responseText + ")");
                     alert(err.Message);
+                }
+            });
+        }
+
+        function activateUser(id) {
+            $.ajax({
+                url: "api/activateUser.php",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data) {
+                        if(data == "1"){
+                            window.location.replace("./find-friends.php");
+                        }
+                        else{
+                            console.log(data);
+                            alert("Error!");
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+
+        function deactivateUser(id) {
+            $.ajax({
+                url: "api/deactivateUser.php",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data) {
+                        if(data == "1"){
+                            window.location.replace("./find-friends.php");
+                        }
+                        else{
+                            console.log(data);
+                            alert("Error!");
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }
+            });
+        }
+
+        function searchUser() {
+            $.ajax({
+                url: "api/searchUser.php",
+                type: "POST",
+                data: {
+                    query: $("#searchTxtb").val()
+                },
+                success: function (data) {
+                    if (data) {
+                        if(data == "0"){
+                            alert("No Users");
+                        }
+                        else{
+                            $("#usersInjector").html(data);
+                        }
+                    }
+                },
+                error: function (xhr, status, error) {
+                    $("#usersInjector").html(request.responseText);
                 }
             });
         }

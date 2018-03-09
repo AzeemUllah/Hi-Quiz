@@ -2,11 +2,13 @@
 include "config.php";
 session_start();
 
+$sql = '';
+
 if($_SESSION['admin'] == '0') {
-    $sql = "SELECT * FROM `user` where is_admin = 0 and user_id != " . $_SESSION['id'] . " and active = 1";
+    $sql = "SELECT * FROM `user` WHERE username like '%".$_POST['query']."%' and is_admin = 0 and user_id != " . $_SESSION['id'] . " and active = 1";
 }
 else{
-    $sql = "SELECT * FROM `user` where is_admin = 0 and user_id != " . $_SESSION['id'];
+    $sql = "SELECT * FROM `user` WHERE username like '%".$_POST['query']."%' and is_admin = 0 and user_id != " . $_SESSION['id'];
 }
 
 $result = $conn->query($sql);
@@ -23,22 +25,22 @@ if ($result->num_rows > 0) {
                                 <a href='profile.php?id=".$row['user_id']."'><img class='avatar' src='".$row['user_pic']."' alt=''></a>
                             </div>";
 
-                    if($_SESSION['admin'] == 1) {
-                        $toReturn .= "<div class='dropdown profile-action'>
+        if($_SESSION['admin'] == 1) {
+            $toReturn .= "<div class='dropdown profile-action'>
                                 <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
                                 <ul class='dropdown-menu pull-right'>";
 
-                        if($row['active'] == 1){
-                            $toReturn .= "<li><a onclick='deactivateUser(".$row['user_id'].")' data-toggle='modal' data-target='#edit_employee'><i class='fa fa-pencil m-r-5'></i> Deactivate </a></li>";
-                        }
-                        else{
-                            $toReturn .= "<li><a onclick='activateUser(".$row['user_id'].")' data-toggle='modal' data-target='#edit_employee'><i class='fa fa-pencil m-r-5'></i> Activate </a></li>";
-                        }
+            if($row['active'] == 1){
+                $toReturn .= "<li><a onclick='deactivateUser(".$row['user_id'].")' data-toggle='modal' data-target='#edit_employee'><i class='fa fa-pencil m-r-5'></i> Deactivate </a></li>";
+            }
+            else{
+                $toReturn .= "<li><a onclick='activateUser(".$row['user_id'].")' data-toggle='modal' data-target='#edit_employee'><i class='fa fa-pencil m-r-5'></i> Activate </a></li>";
+            }
 
-                        $toReturn .= "
+            $toReturn .= "
                                 </ul>
                             </div>";
-                    }
+        }
 
 
         $sql2 = "SELECT * FROM `follow_friends` where user_id = " . $_SESSION['id'] . " and follow_id = " . $row['user_id'];

@@ -17,9 +17,19 @@ if ($result->num_rows > 0) {
 						  <div class='dropdown'>
 							 <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
 							 <ul class='dropdown-menu pull-right'>
-								<li><a  href='#' data-toggle='modal' data-target='#edit_department".$row['cat_id']."' title='Edit'><i class='fa fa-pencil m-r-5'></i> Edit</a></li>
+							 
+								<li><a  href='#' data-toggle='modal' data-target='#see_quiz".$row['cat_id']."' title='Edit'><i class='fa fa-pencil m-r-5'></i> View Quiz</a></li>";
+
+            if($_SESSION['admin'] == 1){
+                $toReturn .= "<li><a  href='#' data-toggle='modal' data-target='#edit_department".$row['cat_id']."' title='Edit'><i class='fa fa-pencil m-r-5'></i> Edit</a></li>
 								<li><a  href='#' data-toggle='modal' data-target='#delete_department".$row['cat_id']."' title='Delete'><i class='fa fa-trash-o m-r-5'></i> Delete</a></li>
-							 </ul>
+                    ";
+            }
+
+
+
+
+        $toReturn .="</ul>
 						  </div>
 					   </td>
 					</tr>";
@@ -27,8 +37,8 @@ if ($result->num_rows > 0) {
 
 
 
-
-		$toReturn2 .= "<div id='edit_department".$row['cat_id']."' class='modal custom-modal fade' role='dialog'>
+        if($_SESSION['admin'] == 1) {
+            $toReturn2 .= "<div id='edit_department" . $row['cat_id'] . "' class='modal custom-modal fade' role='dialog'>
 						   <div class='modal-dialog'>
 							  <button type='button' class='close' data-dismiss='modal'>&times;</button>
 							  <div class='modal-content modal-md'>
@@ -39,14 +49,14 @@ if ($result->num_rows > 0) {
 									<form>
 									   <div class='form-group'>
 										  <label>Category Name <span class='text-danger'>*</span></label>
-										  <input class='form-control' id=editCategoryName".$row['cat_id']." value='".$row['cat_name']."' type='text'>
+										  <input class='form-control' id=editCategoryName" . $row['cat_id'] . " value='" . $row['cat_name'] . "' type='text'>
 									   </div>
 									   <div class='form-group'>
 										  <label>Category Description <span class='text-danger'>*</span></label>
-										  <input class='form-control' id=editCategoryDesc".$row['cat_id']." value='".$row['cat_topic']."' type='text'>
+										  <input class='form-control' id=editCategoryDesc" . $row['cat_id'] . " value='" . $row['cat_topic'] . "' type='text'>
 									   </div>
 									   <div class='m-t-20 text-center'>
-										  <button class='btn btn-primary' onclick='editCategory(".$row['cat_id'].")'>Save Changes</button>
+										  <button class='btn btn-primary' onclick='editCategory(" . $row['cat_id'] . ")'>Save Changes</button>
 									   </div>
 									</form>
 								 </div>
@@ -57,7 +67,7 @@ if ($result->num_rows > 0) {
 						
 						
 						
-						<div id='delete_department".$row['cat_id']."' class='modal custom-modal fade' role='dialog'>
+						<div id='delete_department" . $row['cat_id'] . "' class='modal custom-modal fade' role='dialog'>
 						   <div class='modal-dialog'>
 							  <div class='modal-content modal-md'>
 								 <div class='modal-header'>
@@ -67,14 +77,15 @@ if ($result->num_rows > 0) {
 									<p>Are you sure want to delete this?</p>
 									<div class='m-t-20 text-left'>
 									   <a href='#' class='btn btn-default' data-dismiss='modal'>Close</a>
-									   <button onclick='deleteCategory(".$row['cat_id'].")' type='button' class='btn btn-danger'>Delete</button>
+									   <button onclick='deleteCategory(" . $row['cat_id'] . ")' type='button' class='btn btn-danger'>Delete</button>
 									</div>
 								 </div>
 							  </div>
 						   </div>
 						</div>
 						
-						"; 
+						";
+        }
     }
 } else {
    $toReturn = 0;
