@@ -227,7 +227,7 @@
                         }
                         else{
                             console.log(data);
-                            alert("Error!");
+                            alert("Error! Delete all the quiz associated with this category first." );
                         }
                     }
                 },
@@ -237,6 +237,11 @@
 
             });
 		}
+		
+		
+		function showQuiz(id) {
+            window.location.href='./list-quizes.php?id='+id;
+        }
 		
 		</script>
 		

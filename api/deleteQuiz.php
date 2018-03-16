@@ -2,7 +2,7 @@
 include "config.php";
 session_start();
 
-$sql = "DELETE FROM `category` WHERE `category`.`cat_id` = " . $_POST['id'];
+$sql = "DELETE FROM `quiz` WHERE `quiz`.`quiz_id` = " . $_POST['id'];
 
 if ($conn->query($sql) === TRUE) {
     echo "1";

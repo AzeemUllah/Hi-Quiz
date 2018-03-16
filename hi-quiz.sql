@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2018 at 12:17 PM
+-- Generation Time: Mar 16, 2018 at 10:37 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -39,7 +39,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`, `cat_topic`) VALUES
-(1, 'sadasd', 'dasd');
+(1, '1', '1'),
+(2, '2', '2');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,16 @@ CREATE TABLE `question_bank` (
 --
 
 INSERT INTO `question_bank` (`ques_id`, `ques_name`, `c1`, `c2`, `c3`, `c4`, `correct`, `quiz_id`) VALUES
-(2, 'Howadasd asdsad??', 'sadasd', 'asdasd', 'dasd', 'dsad', '1', 1);
+(4, 'c', 'c', 'c', 'b', 'b', '3', 5),
+(5, 'd', 'd', 'b', 'd', 'b', '4', 5),
+(6, 'b', 'b', 'b', 'b', 'b', '4', 6),
+(7, 'b', 'b', 'b', 'b', 'b', '4', 6),
+(8, 'aas', 'sdsd', 'dasd', 'adas', 'sdasd', '4', 7),
+(9, 'asdsd', 'asdasd', 'dasd', 'sdasd', 'asdasd', '1', 8),
+(10, 'adsad', 'dasd', 'dasd', 'dasd', 'dasd', '1', 9),
+(11, 'adasd', 'dasd', 'dasd', 'dasd', 'dasd', '1', 10),
+(12, 'Hi', 'a', 'b', 'c', 'd', '2', 11),
+(13, 'Hi', 'a', 'b', 'c', 'd', '2', 11);
 
 -- --------------------------------------------------------
 
@@ -114,7 +124,14 @@ CREATE TABLE `quiz` (
 --
 
 INSERT INTO `quiz` (`quiz_id`, `quiz_time`, `cat_id`) VALUES
-(1, '06:25:18', 1);
+(4, '00:03:00', 1),
+(5, '00:05:00', 2),
+(6, '00:00:00', 1),
+(7, '00:00:00', 1),
+(8, '00:00:00', 1),
+(9, '00:00:00', 1),
+(10, '00:00:00', 1),
+(11, '00:10:00', 1);
 
 -- --------------------------------------------------------
 
@@ -129,6 +146,15 @@ CREATE TABLE `quiz_question_score` (
   `user_id` int(11) NOT NULL,
   `answer` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quiz_question_score`
+--
+
+INSERT INTO `quiz_question_score` (`quiz_id`, `ques_id`, `time_stamp`, `user_id`, `answer`) VALUES
+(10, 11, '2018-03-12 10:25:32', 2, 2),
+(11, 12, '2018-03-10 13:39:23', 2, 3),
+(11, 13, '2018-03-10 13:39:09', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -146,17 +172,18 @@ CREATE TABLE `user` (
   `address` varchar(500) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `active` bit(1) NOT NULL DEFAULT b'1',
-  `user_pic` varchar(250) NOT NULL DEFAULT 'images/user.jpg'
+  `active` int(1) NOT NULL DEFAULT '1',
+  `user_pic` varchar(250) NOT NULL DEFAULT 'images/user.jpg',
+  `online` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `password`, `user_email`, `is_admin`, `phone`, `address`, `gender`, `dob`, `active`, `user_pic`) VALUES
-(2, 'admin', 'admin123', 'admin@hiquiz.com', 1, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg'),
-(4, 'admin', 'admin123', 'admin@hiquiz.com', 0, '+92312124124', 'asdd asdada adsdada', 'male', '0000-00-00', b'1', 'images/user.jpg');
+INSERT INTO `user` (`user_id`, `username`, `password`, `user_email`, `is_admin`, `phone`, `address`, `gender`, `dob`, `active`, `user_pic`, `online`) VALUES
+(2, 'admin', 'admin123', 'admin@hiquiz.com', 0, '+9231212412', 'asd', 'female', '0000-00-00', 1, 'images/user.jpg', 1),
+(3, 'admin', 'admin123', 'admin@hiquiz.com', 0, '+9231212412', 'asd', 'female', '0000-00-00', 1, 'images/user.jpg', 1);
 
 --
 -- Indexes for dumped tables
@@ -224,7 +251,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `challenger`
@@ -242,19 +269,19 @@ ALTER TABLE `follow_friends`
 -- AUTO_INCREMENT for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  MODIFY `ques_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ques_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `quiz_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -270,7 +297,7 @@ ALTER TABLE `follow_friends`
 -- Constraints for table `question_bank`
 --
 ALTER TABLE `question_bank`
-  ADD CONSTRAINT `question_bank_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`);
+  ADD CONSTRAINT `question_bank_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`quiz_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `quiz`

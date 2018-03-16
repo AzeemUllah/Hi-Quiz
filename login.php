@@ -1,7 +1,18 @@
 <?php 
 session_start();
-$_SESSION['id'] = null;
+
+include "./api/config.php";
+$sql = "UPDATE `user` SET `online` = '0' WHERE `user`.`user_id` = " . $_SESSION['id'];
+if ($conn->query($sql) === TRUE) {
+    $_SESSION['id'] = null;
+}
+
+$conn->close();
 ?>
+
+
+
+
 <html>
 <head>
         <meta charset="utf-8">
@@ -35,9 +46,12 @@ $_SESSION['id'] = null;
 								<div class="form-group text-center">
 									<button id=submit class="btn btn-primary btn-block account-btn" type="button">Login</button>
 								</div>
-								<div class="text-center">
+								<div class="">
 									<a href="forgot-password.html">Forgot your password?</a>
+                                    <div class="pull-right"><a href="forgot-password.html">Signup?</a></div>
 								</div>
+
+
 							</form>
 						</div>
 					</div>

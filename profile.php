@@ -126,7 +126,7 @@ if(isset($_GET['id'])){
 
 
 
-							<a href="edit-profile.html" class="btn btn-primary rounded"><i class="fa fa-plus"></i> Edit Profile</a>
+							<a href="edit-profile.php" class="btn btn-primary rounded"><i class="fa fa-plus"></i> Edit Profile</a>
 						</div>
 					</div>
 					<div class="card-box">
@@ -222,7 +222,9 @@ if(isset($_GET['id'])){
                     success: function (data) {
                         if (data) {
                             if(data == "1"){
-                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                                <?php if(isset($_GET['id'])){
+                                echo 'window.location.replace("./profile.php?id='.$_GET['id'].'");';
+                            }?>
                             }
                             else{
                                 console.log(data);
@@ -247,7 +249,9 @@ if(isset($_GET['id'])){
                     success: function (data) {
                         if (data) {
                             if(data == "1"){
-                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                                <?php if(isset($_GET['id'])){
+                                echo 'window.location.replace("./profile.php?id='.$_GET['id'].'");';
+                            }?>
                             }
                             else{
                                 console.log(data);
@@ -273,7 +277,9 @@ if(isset($_GET['id'])){
                     success: function (data) {
                         if (data) {
                             if(data == "1"){
-                                window.location.replace("./profile.php?id=" + <?php echo $_GET['id']; ?>);
+                                <?php if(isset($_GET['id'])){
+                                    echo 'window.location.replace("./profile.php?id='.$_GET['id'].'");';
+                            }?>
                             }
                             else{
                                 console.log(data);

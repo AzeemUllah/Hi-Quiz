@@ -18,7 +18,7 @@ if ($result->num_rows > 0) {
 							 <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
 							 <ul class='dropdown-menu pull-right'>
 							 
-								<li><a  href='#' data-toggle='modal' data-target='#see_quiz".$row['cat_id']."' title='Edit'><i class='fa fa-pencil m-r-5'></i> View Quiz</a></li>";
+								<li><a onclick='showQuiz(".$row['cat_id'].")' title='Edit'><i class='fa fa-pencil m-r-5'></i> View Quiz</a></li>";
 
             if($_SESSION['admin'] == 1){
                 $toReturn .= "<li><a  href='#' data-toggle='modal' data-target='#edit_department".$row['cat_id']."' title='Edit'><i class='fa fa-pencil m-r-5'></i> Edit</a></li>

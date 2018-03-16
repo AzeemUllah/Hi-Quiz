@@ -16,8 +16,13 @@ if ($result->num_rows > 0) {
 		$_SESSION["gender"] = $row["gender"];
 		$_SESSION["dob"] = $row["dob"];
 
+        $sql = "UPDATE `user` SET `online` = '1' WHERE `user`.`user_id` = " . $_SESSION['id'];
+        if ($conn->query($sql) === TRUE) {
+           	echo 1;
+        } else {
+          echo 0;
+        }
     }
-	echo 1;
 } else {
    echo 0;
 }
